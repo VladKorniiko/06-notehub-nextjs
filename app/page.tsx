@@ -17,7 +17,6 @@ export default function Home() {
           and productivity.
         </p>
       </div>
-      ;
     </main>
   );
 }
