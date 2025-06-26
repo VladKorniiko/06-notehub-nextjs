@@ -1,9 +1,9 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
-import { useParams } from "next/navigation";
-import styles from "./NoteDetails.module.css";
+import css from "./NoteDetails.module.css";
 
 export default function NoteDetailsClient() {
   const params = useParams();
@@ -22,16 +22,14 @@ export default function NoteDetailsClient() {
   if (error || !note) return <p>Something went wrong.</p>;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.item}>
-        <div className={styles.header}>
+    <div className={css.container}>
+      <div className={css.item}>
+        <div className={css.header}>
           <h2>{note.title}</h2>
-          <button className={styles.editBtn}>Edit note</button>
+          <button className={css.editBtn}>Edit note</button>
         </div>
-        <p className={styles.content}>{note.content}</p>
-        <p className={styles.date}>
-          {new Date(note.createdAt).toLocaleString()}
-        </p>
+        <p className={css.content}>{note.content}</p>
+        <p className={css.date}>{new Date(note.createdAt).toLocaleString()}</p>
       </div>
     </div>
   );
