@@ -1,4 +1,4 @@
-import css from "./SearchBox.module.css";
+import css from './SearchBox.module.css';
 
 interface SearchBoxProps {
   value: string;
@@ -12,7 +12,7 @@ export default function SearchBox({ value, onSearchChange }: SearchBoxProps) {
       type="text"
       placeholder="Search notes"
       value={value}
-      onChange={(event) => {
+      onChange={event => {
         onSearchChange(event.target.value);
       }}
     />

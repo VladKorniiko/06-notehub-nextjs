@@ -1,11 +1,11 @@
-import css from "./NoteForm.module.css";
-import { useId } from "react";
-import { Form, Formik, Field, ErrorMessage } from "formik";
-import type { FormikHelpers } from "formik";
-import { object, string } from "yup";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNote } from "@/lib/api";
-import toast from "react-hot-toast";
+import css from './NoteForm.module.css';
+import { useId } from 'react';
+import { Form, Formik, Field, ErrorMessage } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { object, string } from 'yup';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createNote } from '@/lib/api';
+import toast from 'react-hot-toast';
 
 interface NoteFormProps {
   onClose: () => void;
@@ -14,7 +14,7 @@ interface NoteFormProps {
 interface FormValues {
   title: string;
   content?: string;
-  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
+  tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
 export default function NoteForm({ onClose }: NoteFormProps) {
@@ -24,12 +24,12 @@ export default function NoteForm({ onClose }: NoteFormProps) {
   const { mutateAsync } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
-      toast.success("Note created successfully");
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+      toast.success('Note created successfully');
       onClose();
     },
     onError: () => {
-      toast.error("Something went wrong, please, try again.");
+      toast.error('Something went wrong, please, try again.');
     },
   });
 
@@ -43,21 +43,21 @@ export default function NoteForm({ onClose }: NoteFormProps) {
 
   return (
     <Formik
-      initialValues={{ title: "", content: "", tag: "Todo" }}
+      initialValues={{ title: '', content: '', tag: 'Todo' }}
       onSubmit={handleSubmit}
       validationSchema={object({
         title: string()
-          .min(3, "Title must be at least 3 characters")
-          .max(50, "Title must be at most 50 characters")
-          .required("Title is required"),
+          .min(3, 'Title must be at least 3 characters')
+          .max(50, 'Title must be at most 50 characters')
+          .required('Title is required'),
 
-        content: string().max(500, "Content must be at most 500 characters"),
+        content: string().max(500, 'Content must be at most 500 characters'),
         tag: string()
           .oneOf(
-            ["Todo", "Work", "Personal", "Meeting", "Shopping"],
-            "Invalid tag"
+            ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'],
+            'Invalid tag'
           )
-          .required("Tag is required"),
+          .required('Tag is required'),
       })}
     >
       {({ isSubmitting }) => (
